@@ -44,18 +44,24 @@ app.get('/scrape', function (req, res) {
           });
         }
       });
-      Article.remove({ title: "" }, function (err) {
-        if (err) throw err;
-      });
-
     });
-
-
-
-    console.log("Scrape complete.")
+    res.send("Scrape complete.")
   });
 })
 
+app.get("/articles", function(req, res){
+  Article.deleteMany({ title: "" }, function (err) {    //Necessary to remove advertisements from db
+    if (err) throw err;
+  });
+  Article.find({})
+  .then(function(dbArticle){
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    // If an error occurred, send it to the client
+    res.json(err);
+  });
+})
 
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
