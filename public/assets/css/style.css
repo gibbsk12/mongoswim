@@ -1,0 +1,11 @@
+body {
+    background-image: url("/assets/images/swimbackground.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+}
+
+.jumbotron{
+    margin-top: 30px;
+}
+

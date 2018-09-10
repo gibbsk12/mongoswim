@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="col-12 jumbotron">
+        <div class="text-center">
+            <h1>MongoSwim</h1>
+            <p>A Mongo Scraper for Swimming News</p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{#if article}}
+            {{#each article}}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{this.imgLink}}" alt="Card image cap" height="180px" width="286px">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}}</h5>
+                    <p class="card-text">{{this.summary}}</p>
+                    <a href="{{this.link}} target='_blank'" class="btn btn-primary">Read More...</a>
+                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+                </div>
+            </div>
+            {{/each}}
+            {{else}}
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    No new articles. Try scraping again!
+                </div>
+            </div>
+            {{/if}}
+
+        </div>
+    </div>
+</div>
