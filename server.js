@@ -49,17 +49,14 @@ app.get('/scrape', function (req, res) { //Scrapes the SwimSwam Site
       var title = $(element).children("h4").children("a").text();
       var link = $(element).children("div").children("a").attr("href");
       var summary = $(element).children("p").text();
-      var imgLink = $(element).children("div").children("a").children("img").attr("src");
       if (title) {
         results.title = title;
         results.link = link;
         results.summary = summary;
-        results.imgLink = imgLink;
       } else {
         results.title = $(element).children("h3").children("a").text();
         results.link = link;
         results.summary = summary;
-        results.imgLink = imgLink;
       };
       var entry = new Article(results);
       Article.find({ title: results.title }, function (err, data) {

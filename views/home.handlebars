@@ -7,28 +7,39 @@
 
     </div>
     <div class="row">
-        <div class="col-md-4">
-            {{#if article}}
-            {{#each article}}
+
+        {{#if article}}
+        {{#each article}}
+        {{!-- <div class="col-md-4">
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{{this.imgLink}}" alt="Card image cap" height="180px" width="286px">
                 <div class="card-body">
                     <h5 class="card-title">{{this.title}}</h5>
                     <p class="card-text">{{this.summary}}</p>
+                </div>
+            </div>
+        </div> --}}
+        <div class="col-md-4">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-header">{{this.title}}</div>
+                <div class="card-body">
+                    <p class="card-text">{{this.summary}}</p>
                     <a href="{{this.link}} target='_blank'" class="btn btn-primary">Read More...</a>
                     <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
                 </div>
             </div>
-            {{/each}}
-            {{else}}
-
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="col-md-12">
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     No new articles. Try scraping again!
                 </div>
             </div>
-            {{/if}}
-
         </div>
+        {{/if}}
+
     </div>
+</div>
 </div>
