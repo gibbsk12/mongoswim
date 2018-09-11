@@ -4,7 +4,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var request = require("request");
 var cheerio = require("cheerio");
-
+var exphbs = require("express-handlebars");
 var Note = require("./models/Note");
 var Article = require("./models/Article");
 var port = process.env.PORT || 4040;
@@ -16,19 +16,21 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost/swimmingdb");
 
-var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 //Handlebars Renders
 app.get("/", function(req, res) {
+  Article.deleteMany({ title: "" }, function (err) {    //Necessary to remove advertisements from db
+    if (err) throw err;
+  });
   Article.find({}, function(error, data) {
-    var hbsObject = {
+    var hbNewsObject = {
       article: data
     };
-    console.log(hbsObject);
-    res.render("home", hbsObject);
+    console.log(hbNewsObject);
+    res.render("home", hbNewsObject);
   });
 });
 

@@ -1,36 +1,32 @@
 <div class="container">
-    <div class="col-12 jumbotron">
+
+    <div class="col-md-12 jumbotron">
         <div class="text-center">
-            <h1>MongoSwim</h1>
-            <p>A Mongo Scraper for Swimming News</p>
+            <h1> Saved Articles</h1>
         </div>
-
     </div>
-    <div class="row">
-
         {{#if article}}
         {{#each article}}
-        <div class="col-md-4">
-            <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card bg-light mb-3">
                 <div class="card-header">{{this.title}}</div>
                 <div class="card-body">
                     <p class="card-text">{{this.summary}}</p>
                     <a href="{{this.link}}" target="_blank" class="btn btn-primary">Read More...</a>
-                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
+                    <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}"
+                        data-id={{this._id}}>Add a Note</button>
+                    <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button>
                 </div>
             </div>
-        </div>
+        
         {{/each}}
         {{else}}
-        <div class="col-md-12">
-            <div class="card" style="width: 18rem;">
+        
+            <div class="card noSaved" style="">
                 <div class="card-body">
-                    No new articles. Try scraping again!
+                    No saved articles!
                 </div>
             </div>
-        </div>
+        
         {{/if}}
-
-    </div>
-</div>
+   
 </div>

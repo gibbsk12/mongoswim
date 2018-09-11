@@ -13,3 +13,7 @@ body {
 .card{
     margin-bottom: 20px;
 }
+
+.noSaved{
+    background-color: #e3f2fd;
+}
