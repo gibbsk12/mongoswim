@@ -5,28 +5,30 @@
             <h1> Saved Articles</h1>
         </div>
     </div>
-        {{#if article}}
-        {{#each article}}
-            <div class="card bg-light mb-3">
-                <div class="card-header">{{this.title}}</div>
-                <div class="card-body">
-                    <p class="card-text">{{this.summary}}</p>
-                    <a href="{{this.link}}" target="_blank" class="btn btn-primary">Read More...</a>
-                    <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}"
-                        data-id={{this._id}}>Add a Note</button>
-                    <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button>
-                </div>
-            </div>
-        
-        {{/each}}
-        {{else}}
-        
-            <div class="card noSaved" style="">
-                <div class="card-body">
-                    No saved articles!
-                </div>
-            </div>
-        
-        {{/if}}
-   
+    {{#if article}}
+    {{#each article}}
+    <div class="card bg-light mb-3">
+        <div class="card-header">{{this.title}}</div>
+        <div class="card-body">
+            <p class="card-text">{{this.summary}}</p>
+            <a href="{{this.link}}" target="_blank" class="btn btn-primary">Read More...</a>
+ <button type="button" class="btn btn-success addNote" data-toggle="modal" data-target="#noteModal{{this._id}}" data-id={{this._id}}>Add a Note</button>
+                        <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button>
+        </div>
+    </div>
+
+    {{/each}}
+    {{else}}
+
+    <div class="card noSaved" style="">
+        <div class="card-body">
+            No saved articles!
+        </div>
+    </div>
+
+    {{/if}}
 </div>
+
+{{#each article}}
+{{> notes-modal }}
+{{/each}}

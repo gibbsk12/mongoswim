@@ -9,6 +9,7 @@ var Note = require("./models/Note");
 var Article = require("./models/Article");
 var port = process.env.PORT || 4040;
 var app = express();
+var path = require("path");
 
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,10 +18,13 @@ app.use(express.static("public"));
 mongoose.connect("mongodb://localhost/swimmingdb");
 
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main",
+  partialsDir: path.join(__dirname, "/views/layouts/partials")
+}));
 app.set("view engine", "handlebars");
 
-//Handlebars Renders
+//Handlebars for Home Page
 app.get("/", function(req, res) {
   Article.deleteMany({ title: "" }, function (err) {    //Necessary to remove advertisements from db
     if (err) throw err;
@@ -34,6 +38,7 @@ app.get("/", function(req, res) {
   });
 });
 
+//Handlebars for Saved Articles 
 app.get("/saved", function(req, res) {
   Article.find({"saved": true}).populate("notes").exec(function(error, articles) {
     var hbsObject = {
@@ -43,6 +48,7 @@ app.get("/saved", function(req, res) {
   });
 });
 
+//Scrape the Webpage AND push to the database 
 app.get('/scrape', function (req, res) { //Scrapes the SwimSwam Site
   request("https://swimswam.com/news/", function (error, response, html) {
     var $ = cheerio.load(html);
@@ -73,6 +79,7 @@ app.get('/scrape', function (req, res) { //Scrapes the SwimSwam Site
   });
 })
 
+//Creates /articles page 
 app.get("/articles", function(req, res){ //Grabs all articles 
   Article.deleteMany({ title: "" }, function (err) {    //Necessary to remove advertisements from db
     if (err) throw err;
@@ -85,6 +92,7 @@ app.get("/articles", function(req, res){ //Grabs all articles
     res.json(err);
   });
 })
+
 
 app.get("/articles/:id", function(req, res) { //Grabbing a specific article 
   Article.findOne({ "_id": req.params.id })
