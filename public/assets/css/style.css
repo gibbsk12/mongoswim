@@ -8,6 +8,7 @@ body {
 .jumbotron{
     margin-top: 30px;
     background-color: #e3f2fd;
+    font-family: 'Architects Daughter', cursive;
 }
 
 .card{

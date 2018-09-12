@@ -5,8 +5,14 @@ $("#scrape").on("click", function() {
         url: "/scrape",
     }).done(function(data) {
         console.log(data)
-        window.location = "/"
+        // window.location = "/"
+        $('#scrapeCompleteModal').modal('show');
     })
+});
+
+//
+$("#closeAndLoadBtn").on("click", function() {
+    window.location = "/"
 });
 
 //Save Article
@@ -16,7 +22,10 @@ $(".save").on("click", function() {
         method: "POST",
         url: "/articles/save/" + thisId
     }).done(function(data) {
-        window.location = "/"
+        // window.location = "/"
+        var thisModal = "#saveModal" + thisId
+        console.log(thisModal)
+        $(thisModal).modal('toggle');
     })
 });
 
@@ -31,7 +40,7 @@ $(".delete").on("click", function() {
     })
 });
 
-//Save a Note? 
+//Save a Note
 $(".saveNote").on("click", function() {
     var thisId = $(this).attr("data-id");
     if (!$("#noteText" + thisId).val()) {
@@ -44,9 +53,7 @@ $(".saveNote").on("click", function() {
               text: $("#noteText" + thisId).val()
             }
           }).done(function(data) {
-              // Log the response
               console.log(data);
-              // Empty the notes section
               $("#noteText" + thisId).val("");
               $(".modalNote").modal("hide");
               window.location = "/saved"
@@ -54,7 +61,7 @@ $(".saveNote").on("click", function() {
     }
 });
 
-//Delete a Note?
+//Delete a Note
 $(".deleteNote").on("click", function() {
     var noteId = $(this).attr("data-note-id");
     var articleId = $(this).attr("data-article-id");
