@@ -15,8 +15,10 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/swimmingdb");
-
+// mongoose.connect("mongodb://localhost/swimmingdb");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/swimmingdb";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 app.engine("handlebars", exphbs({
   defaultLayout: "main",
