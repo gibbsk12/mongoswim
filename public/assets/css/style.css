@@ -14,6 +14,12 @@ body {
     margin-bottom: 20px;
 }
 
-.noSaved{
+.noSaved, .updateJumbo{
     background-color: #e3f2fd;
 }
+
+.navbar{
+    font-family: 'Architects Daughter', cursive;
+}
+
+
